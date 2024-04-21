@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw3dlsb4v73c4"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerMagnet.cs" id="1_sbx3r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2gmuy"]
+radius = 68.0661
+
+[node name="PlayerMagnet" type="Area2D"]
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_sbx3r")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2gmuy")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

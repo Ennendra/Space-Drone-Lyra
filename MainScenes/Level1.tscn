@@ -1,0 +1,47 @@
+[gd_scene load_steps=16 format=3 uid="uid://vwtbkoh66uq1"]
+
+[ext_resource type="Script" path="res://Scripts/LevelControllerScripts/LC_Level1.cs" id="1_g54c5"]
+[ext_resource type="PackedScene" uid="uid://v74qfqmnbok2" path="res://Objects/LevelController.tscn" id="1_pcdc4"]
+[ext_resource type="Texture2D" uid="uid://c5wjfjyh0ilmh" path="res://Textures/Backgrounds/Starfield_02-1024x1024.png" id="2_g3v1d"]
+[ext_resource type="PackedScene" uid="uid://dft56udyey2b1" path="res://Objects/Enemies/Enemy1.tscn" id="3_r5dvq"]
+[ext_resource type="PackedScene" uid="uid://bbwqubuqkk131" path="res://Objects/Enemies/Enemy2.tscn" id="4_hu738"]
+[ext_resource type="PackedScene" uid="uid://ft7ieonkhsp2" path="res://Objects/Enemies/Enemy3.tscn" id="5_a3kkt"]
+[ext_resource type="PackedScene" uid="uid://ddkw63a5tm3cr" path="res://Objects/Enemies/Enemy4.tscn" id="5_o8wrl"]
+[ext_resource type="PackedScene" uid="uid://byh70ub3gh4lk" path="res://Objects/Enemies/EliteEnemy1.tscn" id="6_3vc2w"]
+[ext_resource type="PackedScene" uid="uid://3v34voig5g3m" path="res://Objects/Enemies/Enemy5.tscn" id="6_nxok4"]
+[ext_resource type="Resource" uid="uid://cy486y1nf4ocy" path="res://Objects/Enemies/BossEncounterResources/BossEncounter1_1.tres" id="7_cc4nn"]
+[ext_resource type="PackedScene" uid="uid://d4sh0cnx1fgp" path="res://Objects/Enemies/Enemy6.tscn" id="7_dxbag"]
+[ext_resource type="PackedScene" uid="uid://bkkrxvh1ttq2b" path="res://Objects/Enemies/Enemy7.tscn" id="8_y4qxa"]
+[ext_resource type="Resource" uid="uid://ueinbys26nw2" path="res://Objects/Enemies/BossEncounterResources/BossEncounter1_2.tres" id="12_u7nwy"]
+[ext_resource type="AudioStream" uid="uid://bleqppgsf0l37" path="res://Sounds/Music/Bad Apple.mp3" id="13_owkqq"]
+[ext_resource type="AudioStream" uid="uid://dlcx2ehjcld77" path="res://Sounds/Music/Inescapable Encounter.mp3" id="14_1cybf"]
+
+[node name="Main" type="Node2D"]
+
+[node name="LevelController" parent="." instance=ExtResource("1_pcdc4")]
+script = ExtResource("1_g54c5")
+timerDelays = PackedFloat64Array(2, 2, 1, 3, 2, 5, 2, 1, 3, 2, 4)
+mainEnemies = Array[PackedScene]([ExtResource("3_r5dvq"), ExtResource("4_hu738"), ExtResource("5_a3kkt"), ExtResource("5_o8wrl"), ExtResource("6_nxok4"), ExtResource("7_dxbag"), ExtResource("8_y4qxa")])
+eliteEnemies = Array[PackedScene]([ExtResource("6_3vc2w")])
+bossEncounters = Array[Resource]([ExtResource("7_cc4nn"), ExtResource("12_u7nwy")])
+
+[node name="BGM" type="AudioStreamPlayer" parent="LevelController"]
+process_mode = 3
+stream = ExtResource("13_owkqq")
+volume_db = -5.0
+autoplay = true
+
+[node name="BGMFinalFight" type="AudioStreamPlayer" parent="LevelController"]
+stream = ExtResource("14_1cybf")
+volume_db = -5.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("2_g3v1d")
+region_enabled = true
+region_rect = Rect2(0, 0, 80000, 80000)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3omlkkb5rppe"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/ProjectileParent.cs" id="1_bbt7n"]
+[ext_resource type="Texture2D" uid="uid://ciqn8hvg3u6kv" path="res://Textures/Sprites/Projectiles/Projectile2.png" id="2_b60p4"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="3_74lhu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nonmj"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7r3ct"]
+radius = 3.16228
+
+[node name="ProjectileSniper" type="Area2D" node_paths=PackedStringArray("hitBoxComponent")]
+process_physics_priority = 3
+collision_layer = 0
+collision_mask = 40
+script = ExtResource("1_bbt7n")
+hitBoxComponent = NodePath("HitBoxComponent")
+speed = 1.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_b60p4")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nonmj")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_74lhu")]
+collision_layer = 1
+collision_mask = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_7r3ct")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://crv1q3g054k1x"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemExperienceMagnet.cs" id="1_u2o74"]
+[ext_resource type="Texture2D" uid="uid://cfyfc4j1824ww" path="res://Textures/Icons/ItemIcons/IconExperienceMagnet.png" id="2_kd4sg"]
+
+[node name="ItemExperienceMagnet" type="Node"]
+script = ExtResource("1_u2o74")
+itemIcon = ExtResource("2_kd4sg")
+itemName = "Data Scanner"
+itemDescription = "Increases experience magnetisation range by 20%"

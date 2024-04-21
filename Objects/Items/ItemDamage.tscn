@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqaeyvgr6ech8"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemDamage.cs" id="1_xlexn"]
+[ext_resource type="Texture2D" uid="uid://crled2n4sabxd" path="res://Textures/Icons/ItemIcons/IconDamage.png" id="2_ccca1"]
+
+[node name="ItemDamage" type="Node"]
+script = ExtResource("1_xlexn")
+itemIcon = ExtResource("2_ccca1")
+itemName = "Caliber Enhancer"
+itemDescription = "Increases damage dealt by 10%"

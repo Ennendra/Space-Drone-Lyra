@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bonqraqacj8iq"]
+
+[ext_resource type="Script" path="res://Objects/Players/PlayerInfo/PlayerInfo.cs" id="1_ok7n8"]
+[ext_resource type="Texture2D" uid="uid://c77uxsj63qdos" path="res://Textures/Icons/PlayerIcons/IconPlayer4.png" id="1_wph43"]
+[ext_resource type="PackedScene" uid="uid://jp0h10upjs05" path="res://Objects/Players/Player4.tscn" id="2_aam43"]
+[ext_resource type="Texture2D" uid="uid://cc8bj5gxlbq0e" path="res://Textures/Icons/WeaponIcons/IconGrenade.png" id="4_i1cbk"]
+
+[resource]
+script = ExtResource("1_ok7n8")
+name = "Maru"
+description = "Starts with a grenade launcher. Good crowd control but can be vulnerable to faster enemies."
+playerToInstantiate = ExtResource("2_aam43")
+playerImage = ExtResource("1_wph43")
+starterWeapon = ExtResource("4_i1cbk")

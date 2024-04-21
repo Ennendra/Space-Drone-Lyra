@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhescftuh5boh"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/ProjectileParent.cs" id="1_qgqy1"]
+[ext_resource type="Texture2D" uid="uid://dvfeqgp6gid8q" path="res://Textures/Sprites/Projectiles/Projectile1.png" id="2_1scd3"]
+[ext_resource type="Shader" path="res://Shaders/CyberGlow.gdshader" id="2_a3t01"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="3_8klnb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swsiq"]
+shader = ExtResource("2_a3t01")
+shader_parameter/color1 = Color(0, 0.643137, 0.635294, 1)
+shader_parameter/color2 = Color(0, 0.905882, 0.113725, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/intensity = 2.0
+shader_parameter/opacity = 0.5
+shader_parameter/glow_color = Color(0, 0.807843, 0.854902, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nonmj"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crpiw"]
+radius = 3.0
+
+[node name="ProjectileSMG" type="Area2D" node_paths=PackedStringArray("hitBoxComponent")]
+process_physics_priority = 3
+collision_layer = 0
+collision_mask = 40
+script = ExtResource("1_qgqy1")
+hitBoxComponent = NodePath("HitBoxComponent")
+speed = 3200.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_swsiq")
+texture = ExtResource("2_1scd3")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_nonmj")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_8klnb")]
+collision_layer = 1
+collision_mask = 40
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+visible = false
+shape = SubResource("CircleShape2D_crpiw")

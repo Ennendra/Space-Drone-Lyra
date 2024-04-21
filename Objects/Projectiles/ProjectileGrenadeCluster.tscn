@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bl11ha5awr52h"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/ProjectileGrenade.cs" id="1_x5g6q"]
+[ext_resource type="PackedScene" uid="uid://g65ic3sxqlhj" path="res://Objects/Projectiles/ProjectileGrenadeExplosion.tscn" id="2_q3lk3"]
+[ext_resource type="PackedScene" uid="uid://dhescftuh5boh" path="res://Objects/Projectiles/ProjectileSMG.tscn" id="3_weul2"]
+[ext_resource type="Texture2D" uid="uid://dd4atf0ky6oqn" path="res://Textures/Sprites/Projectiles/ProjectileGrenade.png" id="4_gugso"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="5_b2wq1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nonmj"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crpiw"]
+radius = 3.0
+
+[node name="ProjectileGrenade" type="Area2D" node_paths=PackedStringArray("hitBoxComponent")]
+process_physics_priority = 3
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_x5g6q")
+grenadeExplosionScene = ExtResource("2_q3lk3")
+grenadeClusterScene = ExtResource("3_weul2")
+isCluster = true
+hitBoxComponent = NodePath("HitBoxComponent")
+speed = 250.0
+movementBehaviour = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_gugso")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_nonmj")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("5_b2wq1")]
+collision_layer = 1
+collision_mask = 40
+hitBehaviour = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+visible = false
+shape = SubResource("CircleShape2D_crpiw")

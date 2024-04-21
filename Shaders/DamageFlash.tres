@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dgsgxjq6qelor"]
+
+[ext_resource type="Shader" path="res://Shaders/DamageFlash.gdshader" id="1_sg552"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_sg552")
+shader_parameter/flashColour = Color(0.886275, 0, 0.168627, 1)
+shader_parameter/flashModifier = 0.0

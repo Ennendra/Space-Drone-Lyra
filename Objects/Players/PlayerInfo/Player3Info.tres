@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://cv5upht5uj802"]
+
+[ext_resource type="Texture2D" uid="uid://bj52l88jgnrlu" path="res://Textures/Icons/PlayerIcons/IconPlayer3.png" id="1_7w8oy"]
+[ext_resource type="Script" path="res://Objects/Players/PlayerInfo/PlayerInfo.cs" id="1_qe3ms"]
+[ext_resource type="PackedScene" uid="uid://bg3caj86gplo6" path="res://Objects/Players/Player3.tscn" id="2_dixe6"]
+[ext_resource type="Texture2D" uid="uid://dcpo5mkh2myto" path="res://Textures/Icons/WeaponIcons/IconSniper.png" id="4_xx2gl"]
+
+[resource]
+script = ExtResource("1_qe3ms")
+name = "Andromeda"
+description = "Starts with a Sniper Rifle. Good against high-HP enemies and bosses but cannot take swarms out quickly."
+playerToInstantiate = ExtResource("2_dixe6")
+playerImage = ExtResource("1_7w8oy")
+starterWeapon = ExtResource("4_xx2gl")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://doc4bds2062mb"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemFireRate.cs" id="1_x5bhq"]
+[ext_resource type="Texture2D" uid="uid://ja4g1ep1wj7a" path="res://Textures/Icons/ItemIcons/IconFireRate.png" id="2_2u3ia"]
+
+[node name="ItemFireRate" type="Node"]
+script = ExtResource("1_x5bhq")
+itemIcon = ExtResource("2_2u3ia")
+itemName = "Autoloader"
+itemDescription = "Increase all weapon's rate of fire by 10%"

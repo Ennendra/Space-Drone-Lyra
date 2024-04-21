@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqm4bix4g5ows"]
+
+[ext_resource type="Texture2D" uid="uid://gwdkq0mn176" path="res://Textures/Sprites/FX/ParticleADSNeutralise.png" id="1_560t1"]
+[ext_resource type="Script" path="res://Scripts/ParticleOneShot.cs" id="2_7xr3h"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_83f0g"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ghchb"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c5nyq"]
+gradient = SubResource("Gradient_ghchb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kuj3h"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(100, 0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_c5nyq")
+
+[node name="ProjectileParticleADS" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_83f0g")
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_kuj3h")
+texture = ExtResource("1_560t1")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_7xr3h")
+
+[connection signal="finished" from="." to="." method="OnParticleFinished"]

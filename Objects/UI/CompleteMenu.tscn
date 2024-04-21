@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj7iybhoo1lg"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScripts/CompleteMenu.cs" id="1_2uf4w"]
+[ext_resource type="AudioStream" uid="uid://xrwqkyoecsxt" path="res://Sounds/UI/MenuUI/UIButtonConfirm.ogg" id="2_762rt"]
+[ext_resource type="AudioStream" uid="uid://b1vto22t66vkm" path="res://Sounds/UI/UIButtonHover.ogg" id="3_anq3d"]
+[ext_resource type="AudioStream" uid="uid://cptk40wo6bo20" path="res://Sounds/UI/UICompleteLevel.ogg" id="4_3thwn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6s12"]
+bg_color = Color(0, 0.227451, 0.180392, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yshbe"]
+font_size = 48
+font_color = Color(0, 0.807843, 0.372549, 1)
+
+[node name="CompleteMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 3
+script = ExtResource("1_2uf4w")
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_h6s12")
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = -60.0
+use_top_left = true
+
+[node name="DeathTitle" type="Label" parent="Control/CenterContainer"]
+layout_mode = 2
+text = "Level Complete!"
+label_settings = SubResource("LabelSettings_yshbe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="Control"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer2"]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="Control/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Quick Retry
+"
+
+[node name="Quit" type="Button" parent="Control/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Return to Main Menu"
+
+[node name="AudioButtonConfirm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_762rt")
+
+[node name="AudioButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_anq3d")
+
+[node name="AudioMenuOpen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3thwn")
+volume_db = -5.0
+
+[connection signal="mouse_entered" from="Control/CenterContainer2/VBoxContainer/RetryButton" to="." method="OnButtonHover"]
+[connection signal="pressed" from="Control/CenterContainer2/VBoxContainer/RetryButton" to="." method="OnRetryPress"]
+[connection signal="mouse_entered" from="Control/CenterContainer2/VBoxContainer/Quit" to="." method="OnButtonHover"]
+[connection signal="pressed" from="Control/CenterContainer2/VBoxContainer/Quit" to="." method="OnQuitPress"]

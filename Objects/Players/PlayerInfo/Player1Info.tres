@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://b88w2g1a4q17d"]
+
+[ext_resource type="Texture2D" uid="uid://b0o8xp7my6vv3" path="res://Textures/Icons/PlayerIcons/IconPlayer1.png" id="1_bwcgc"]
+[ext_resource type="PackedScene" uid="uid://huf1n5m3np37" path="res://Objects/Players/Player.tscn" id="1_if20y"]
+[ext_resource type="Script" path="res://Objects/Players/PlayerInfo/PlayerInfo.cs" id="2_n1qon"]
+[ext_resource type="Texture2D" uid="uid://cl1o855kht5q7" path="res://Textures/Icons/WeaponIcons/IconSMG.png" id="4_e35dg"]
+
+[resource]
+script = ExtResource("2_n1qon")
+name = "Lyra"
+description = "Starts with an SMG. A balanced little robot"
+playerToInstantiate = ExtResource("1_if20y")
+playerImage = ExtResource("1_bwcgc")
+starterWeapon = ExtResource("4_e35dg")

@@ -1,0 +1,429 @@
+[gd_scene load_steps=20 format=3 uid="uid://ue2obyq5ypex"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScripts/MainMenu.cs" id="1_hcs3k"]
+[ext_resource type="PackedScene" uid="uid://vwtbkoh66uq1" path="res://MainScenes/Level1.tscn" id="2_e5ppc"]
+[ext_resource type="Texture2D" uid="uid://c5wjfjyh0ilmh" path="res://Textures/Backgrounds/Starfield_02-1024x1024.png" id="3_84j3q"]
+[ext_resource type="Script" path="res://Scripts/MainMenuScripts/ScrollingBackground.cs" id="3_kao2m"]
+[ext_resource type="PackedScene" uid="uid://ocmisiudkhrb" path="res://Objects/Menu/MainMenuCharacterContainer.tscn" id="3_u4ka0"]
+[ext_resource type="Resource" uid="uid://corfilp5rqwp4" path="res://Objects/Players/PlayerInfo/Player2Info.tres" id="4_uwjqp"]
+[ext_resource type="Resource" uid="uid://cv5upht5uj802" path="res://Objects/Players/PlayerInfo/Player3Info.tres" id="5_bobyu"]
+[ext_resource type="Texture2D" uid="uid://baran6ecm5egb" path="res://Textures/Sprites/Player/PlayerF1.png" id="5_tnagd"]
+[ext_resource type="Resource" uid="uid://bonqraqacj8iq" path="res://Objects/Players/PlayerInfo/Player4Info.tres" id="6_bkksa"]
+[ext_resource type="Texture2D" uid="uid://l6n713cdxac3" path="res://Textures/Sprites/Player/PlayerF2.png" id="6_ximmk"]
+[ext_resource type="PackedScene" uid="uid://de55r2e87ombi" path="res://Objects/Menu/MainMenuLevelContainer.tscn" id="7_557od"]
+[ext_resource type="Resource" uid="uid://cup46j5nqqs4i" path="res://Scripts/MainMenuScripts/LevelSelect/Level1Info.tres" id="8_05xnx"]
+[ext_resource type="Resource" uid="uid://b3en2be6ift7q" path="res://Scripts/MainMenuScripts/LevelSelect/Level2Info.tres" id="9_j07v2"]
+[ext_resource type="AudioStream" uid="uid://b1vto22t66vkm" path="res://Sounds/UI/UIButtonHover.ogg" id="10_a5i5r"]
+[ext_resource type="AudioStream" uid="uid://xrwqkyoecsxt" path="res://Sounds/UI/MenuUI/UIButtonConfirm.ogg" id="10_pjse6"]
+[ext_resource type="AudioStream" uid="uid://d1534sro8ik5r" path="res://Sounds/UI/MenuUI/UIButtonFinalConfirm.ogg" id="11_wt0ms"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_umj05"]
+frames = 2
+frame_0/texture = ExtResource("5_tnagd")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("6_ximmk")
+frame_1/duration = 0.25
+
+[sub_resource type="LabelSettings" id="LabelSettings_55gyn"]
+font_size = 48
+font_color = Color(0, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6aew"]
+font_size = 32
+
+[node name="Main" type="Node2D"]
+
+[node name="MainCanvas" type="CanvasLayer" parent="." node_paths=PackedStringArray("characterButtonParent", "characterDescriptionParent", "levelButtonParent", "levelDescriptionParent")]
+script = ExtResource("1_hcs3k")
+levelOneScene = ExtResource("2_e5ppc")
+characterButtonParent = NodePath("CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer")
+characterDescriptionParent = NodePath("CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterDescriptionContainer/CharacterVBoxContainer")
+levelButtonParent = NodePath("LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer")
+levelDescriptionParent = NodePath("LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelDescriptionContainer/LevelVBoxContainer")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="MainCanvas"]
+scroll_base_offset = Vector2(199.32, 0)
+script = ExtResource("3_kao2m")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="MainCanvas/ParallaxBackground"]
+
+[node name="Background" type="Sprite2D" parent="MainCanvas/ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture_repeat = 2
+texture = ExtResource("3_84j3q")
+region_enabled = true
+region_rect = Rect2(0, 0, 80000, 80000)
+
+[node name="SpriteContainer" type="Control" parent="MainCanvas"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/SpriteContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="MainCanvas/SpriteContainer/CenterContainer"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_umj05")
+stretch_mode = 3
+
+[node name="TitleContainer" type="Control" parent="MainCanvas"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 140.0
+grow_horizontal = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/TitleContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="Title" type="Label" parent="MainCanvas/TitleContainer/CenterContainer"]
+layout_mode = 2
+text = "Space-Drone Lyra"
+label_settings = SubResource("LabelSettings_55gyn")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="Control" parent="MainCanvas"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/ButtonContainer"]
+layout_mode = 0
+offset_top = -100.0
+offset_right = 40.0
+offset_bottom = -60.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvas/ButtonContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="CreditsButton" type="Button" parent="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="ExitButton" type="Button" parent="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="ExitConfirmContainer" type="Control" parent="MainCanvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/ExitConfirmContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="PanelContainer" type="PanelContainer" parent="MainCanvas/ExitConfirmContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Do you want to exit the game?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonYes" type="Button" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Yes"
+
+[node name="ButtonNo" type="Button" parent="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "No"
+
+[node name="CharacterSelectContainer" type="Control" parent="MainCanvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/CharacterSelectContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="PanelContainer" type="PanelContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CharacterSelectTitle" type="Label" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select Character"
+label_settings = SubResource("LabelSettings_i6aew")
+horizontal_alignment = 1
+
+[node name="CharacterGridContainer" type="GridContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(550, 400)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="MainMenuCharacterContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer" instance=ExtResource("3_u4ka0")]
+layout_mode = 2
+
+[node name="MainMenuCharacterContainer2" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer" instance=ExtResource("3_u4ka0")]
+layout_mode = 2
+playerInfo = ExtResource("4_uwjqp")
+
+[node name="MainMenuCharacterContainer3" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer" instance=ExtResource("3_u4ka0")]
+layout_mode = 2
+playerInfo = ExtResource("5_bobyu")
+
+[node name="MainMenuCharacterContainer4" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer" instance=ExtResource("3_u4ka0")]
+layout_mode = 2
+playerInfo = ExtResource("6_bkksa")
+
+[node name="CharacterDescriptionContainer" type="PanelContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="CharacterVBoxContainer" type="VBoxContainer" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterDescriptionContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterDescriptionContainer/CharacterVBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterDescriptionContainer/CharacterVBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Back"
+
+[node name="LevelSelectContainer" type="Control" parent="MainCanvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/LevelSelectContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="PanelContainer" type="PanelContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelSelectTitle" type="Label" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select Level"
+label_settings = SubResource("LabelSettings_i6aew")
+horizontal_alignment = 1
+
+[node name="LevelGridContainer" type="GridContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(550, 400)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="LevelSelectContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer" instance=ExtResource("7_557od")]
+layout_mode = 2
+levelInfo = ExtResource("8_05xnx")
+
+[node name="LevelSelectContainer2" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer" instance=ExtResource("7_557od")]
+visible = false
+layout_mode = 2
+levelInfo = ExtResource("9_j07v2")
+
+[node name="LevelDescriptionContainer" type="PanelContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="LevelVBoxContainer" type="VBoxContainer" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelDescriptionContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelDescriptionContainer/LevelVBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelDescriptionContainer/LevelVBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Back"
+
+[node name="CreditsContainer" type="Control" parent="MainCanvas"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MainCanvas/CreditsContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvas/CreditsContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainCanvas/CreditsContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+text = "Sprites from various sources on Itch.io
+
+Sci-Fi Game Icons -- krukowski.itch.io/free-sci-fi-game-icons
+Sci-Fi Weapon icons -- free-game-assets.itch.io/free-sci-fi-icons-weapons
+Drones Asset Pack -- free-game-assets.itch.io/free-drones-pack-pixel-art
+Pixel Simulations -- limofeus.itch.io/pixel-simulations
+Seamless Space Backgrounds -- screamingbrainstudios.itch.io/seamless-space-backgrounds
+Flybot (Player sprite) -- j0nbtz.itch.io/flybot-899
+Spaceships vol2 -- gisha.itch.io/spaceships-2
+
+Sound effects from the video game Freelancer"
+
+[node name="BackButton" type="Button" parent="MainCanvas/CreditsContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="AudioButtonConfirm" type="AudioStreamPlayer" parent="MainCanvas"]
+stream = ExtResource("10_pjse6")
+
+[node name="AudioButtonFinalConfirm" type="AudioStreamPlayer" parent="MainCanvas"]
+stream = ExtResource("11_wt0ms")
+
+[node name="AudioButtonHover" type="AudioStreamPlayer" parent="MainCanvas"]
+stream = ExtResource("10_a5i5r")
+
+[connection signal="mouse_entered" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/StartButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/StartButton" to="MainCanvas" method="OnStartPress"]
+[connection signal="mouse_entered" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/CreditsButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/CreditsButton" to="MainCanvas" method="OnCreditsPress"]
+[connection signal="mouse_entered" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/ExitButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/ButtonContainer/CenterContainer/VBoxContainer/ExitButton" to="MainCanvas" method="OnExitPress"]
+[connection signal="mouse_entered" from="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonYes" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonYes" to="MainCanvas" method="OnExitConfirmYesPress"]
+[connection signal="mouse_entered" from="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonNo" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/ExitConfirmContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ButtonNo" to="MainCanvas" method="OnExitConfirmNoPress"]
+[connection signal="mouse_entered" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer" to="MainCanvas" method="OnCharacterSelectButtonPress" binds= [0]]
+[connection signal="mouse_entered" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer2" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer2" to="MainCanvas" method="OnCharacterSelectButtonPress" binds= [1]]
+[connection signal="mouse_entered" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer3" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer3" to="MainCanvas" method="OnCharacterSelectButtonPress" binds= [2]]
+[connection signal="mouse_entered" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer4" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CharacterGridContainer/MainMenuCharacterContainer4" to="MainCanvas" method="OnCharacterSelectButtonPress" binds= [3]]
+[connection signal="mouse_entered" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CharacterSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnCSBackButtonPress"]
+[connection signal="mouse_entered" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer/LevelSelectContainer" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer/LevelSelectContainer" to="MainCanvas" method="OnLevelSelectButtonPress" binds= [0]]
+[connection signal="mouse_entered" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer/LevelSelectContainer2" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LevelGridContainer/LevelSelectContainer2" to="MainCanvas" method="OnLevelSelectButtonPress" binds= [1]]
+[connection signal="mouse_entered" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/LevelSelectContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnLSBackButtonPress"]
+[connection signal="mouse_entered" from="MainCanvas/CreditsContainer/CenterContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnButtonHover"]
+[connection signal="pressed" from="MainCanvas/CreditsContainer/CenterContainer/VBoxContainer/BackButton" to="MainCanvas" method="OnCreditsBackButtonPress"]

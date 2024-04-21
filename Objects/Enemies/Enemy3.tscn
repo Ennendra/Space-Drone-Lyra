@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://ft7ieonkhsp2"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/Enemy3.cs" id="1_ahr1g"]
+[ext_resource type="Texture2D" uid="uid://oix3hxnjr6ir" path="res://Textures/Sprites/Enemies/Enemy3.png" id="2_24ihm"]
+[ext_resource type="AudioStream" uid="uid://dwnagfn3rtn3m" path="res://Sounds/FX/EnemyHit4.ogg" id="3_05yw7"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="4_tpkf8"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="5_mqwpp"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="6_xind8"]
+[ext_resource type="PackedScene" uid="uid://ufpgmtxdftjk" path="res://Objects/Components/MovementComponent.tscn" id="8_dkdeh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma50w"]
+atlas = ExtResource("2_24ihm")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prw7i"]
+atlas = ExtResource("2_24ihm")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcfpl"]
+atlas = ExtResource("2_24ihm")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndkdm"]
+atlas = ExtResource("2_24ihm")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1s5b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ma50w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prw7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcfpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndkdm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b6v4"]
+radius = 7.0
+height = 25.9999
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_87mfw"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kdqms"]
+radius = 7.07107
+
+[node name="Enemy3" type="Area2D" node_paths=PackedStringArray("hurtBoxComponent", "hitBoxComponent", "healthComponent", "movementComponent") groups=["Enemy"]]
+collision_layer = 512
+collision_mask = 544
+script = ExtResource("1_ahr1g")
+speed = 180.0
+hurtBoxComponent = NodePath("HurtBoxComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+healthComponent = NodePath("HealthComponent")
+movementComponent = NodePath("MovementComponent")
+damage = 15.0
+experience = 5.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l1s5b")
+autoplay = "default"
+frame_progress = 0.452119
+
+[node name="SpriteDamage" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_l1s5b")
+autoplay = "default"
+frame_progress = 0.452119
+
+[node name="AudioTakeHit" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_05yw7")
+volume_db = -25.0
+max_distance = 1000.0
+attenuation = 1.8025
+max_polyphony = 3
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("spriteToFlash") instance=ExtResource("4_tpkf8")]
+baseMaxHealth = 9.0
+spriteToFlash = NodePath("../SpriteDamage")
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_mqwpp")]
+collision_layer = 520
+collision_mask = 512
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+rotation = -1.57338
+shape = SubResource("CapsuleShape2D_5b6v4")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("6_xind8")]
+hitBehaviour = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_87mfw")
+
+[node name="MovementComponent" parent="." instance=ExtResource("8_dkdeh")]
+speed = 180.0
+
+[node name="Collider" type="CollisionShape2D" parent="MovementComponent"]
+rotation = 1.57079
+shape = SubResource("CircleShape2D_kdqms")

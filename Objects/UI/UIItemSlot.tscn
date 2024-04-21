@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://dncxpiy4jpxkm"]
+
+[ext_resource type="Script" path="res://Scripts/UIScripts/UIItemSlot.cs" id="1_afdy8"]
+[ext_resource type="Texture2D" uid="uid://6nsnffo3m7pd" path="res://Textures/UI/UIItemBackground.png" id="1_etyaa"]
+[ext_resource type="Texture2D" uid="uid://ja4g1ep1wj7a" path="res://Textures/Icons/ItemIcons/IconFireRate.png" id="2_a7xqc"]
+[ext_resource type="Texture2D" uid="uid://cdclgho6nehvi" path="res://Textures/UI/UILocked.png" id="3_fj35b"]
+[ext_resource type="Texture2D" uid="uid://c1wwv4efs53a" path="res://Textures/UI/UIItemLevelBackground.png" id="5_87c2g"]
+[ext_resource type="Texture2D" uid="uid://cvk1macek7b2v" path="res://Textures/UI/UIItemLevelPipOff.png" id="6_owp8d"]
+
+[node name="UIItemSlot" type="GridContainer"]
+process_mode = 3
+script = ExtResource("1_afdy8")
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="UIItemBackground" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("1_etyaa")
+
+[node name="UIItemIcon" type="TextureRect" parent="Container/UIItemBackground"]
+visible = false
+layout_mode = 0
+offset_left = 52.0
+offset_top = 47.0
+offset_right = 167.0
+offset_bottom = 170.0
+texture = ExtResource("2_a7xqc")
+
+[node name="UIItemEmpty" type="TextureRect" parent="Container/UIItemBackground"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 45.0
+offset_right = 153.0
+offset_bottom = 168.0
+texture = ExtResource("3_fj35b")
+
+[node name="UIItemLevel" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("5_87c2g")
+stretch_mode = 3
+
+[node name="PipContainer" type="VBoxContainer" parent="Container/UIItemLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -52.0
+offset_right = 20.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="LevelPip1" type="TextureRect" parent="Container/UIItemLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("6_owp8d")
+stretch_mode = 3
+
+[node name="LevelPip2" type="TextureRect" parent="Container/UIItemLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("6_owp8d")
+stretch_mode = 3
+
+[node name="LevelPip3" type="TextureRect" parent="Container/UIItemLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("6_owp8d")
+stretch_mode = 3
+
+[node name="LevelPip4" type="TextureRect" parent="Container/UIItemLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("6_owp8d")
+stretch_mode = 3
+
+[node name="LevelPip5" type="TextureRect" parent="Container/UIItemLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("6_owp8d")
+stretch_mode = 3

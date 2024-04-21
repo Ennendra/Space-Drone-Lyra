@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://corfilp5rqwp4"]
+
+[ext_resource type="Texture2D" uid="uid://l4ejoflsd1br" path="res://Textures/Icons/PlayerIcons/IconPlayer2.png" id="1_bl5j3"]
+[ext_resource type="Script" path="res://Objects/Players/PlayerInfo/PlayerInfo.cs" id="1_pmogj"]
+[ext_resource type="PackedScene" uid="uid://c5o8fbxs3scj0" path="res://Objects/Players/Player2.tscn" id="2_b3thh"]
+[ext_resource type="Texture2D" uid="uid://c38cgnsh8wv8q" path="res://Textures/Icons/WeaponIcons/IconShotgun.png" id="4_vxi1m"]
+
+[resource]
+script = ExtResource("1_pmogj")
+name = "Cadus"
+description = "Starts with a shotgun. Powerful up close"
+playerToInstantiate = ExtResource("2_b3thh")
+playerImage = ExtResource("1_bl5j3")
+starterWeapon = ExtResource("4_vxi1m")

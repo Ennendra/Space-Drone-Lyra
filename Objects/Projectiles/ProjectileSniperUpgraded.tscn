@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://chr1d0rtbs0o1"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/ProjectileSniperUpgraded.cs" id="1_yrjrx"]
+[ext_resource type="Texture2D" uid="uid://cmw03thn15crx" path="res://Textures/Sprites/Projectiles/projectileSniperUpgraded.png" id="2_tmh6o"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="3_abto4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8obmi"]
+radius = 3.0
+height = 900.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t2xjj"]
+radius = 3.0
+height = 900.0
+
+[node name="ProjectileSniperUpgraded" type="Area2D" node_paths=PackedStringArray("hitBoxComponent")]
+process_physics_priority = 3
+collision_layer = 0
+collision_mask = 40
+script = ExtResource("1_yrjrx")
+hitBoxComponent = NodePath("HitBoxComponent")
+movementBehaviour = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(447, 0)
+scale = Vector2(18, 0.6)
+texture = ExtResource("2_tmh6o")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(447, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8obmi")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_abto4")]
+collision_layer = 1
+collision_mask = 40
+hitBehaviour = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(447, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_t2xjj")

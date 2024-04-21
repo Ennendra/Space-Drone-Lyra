@@ -1,0 +1,182 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpuumii10e7as"]
+
+[ext_resource type="Script" path="res://Scripts/UIScripts/MainUI.cs" id="1_euu2o"]
+[ext_resource type="Texture2D" uid="uid://bctgj7s15un0d" path="res://Textures/UI/UIBarBackground.png" id="2_vadpv"]
+[ext_resource type="Texture2D" uid="uid://6v0gq7y3imi8" path="res://Textures/UI/UIBarBackgroundSide.png" id="3_sy8dq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iwlf2"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_p76d3"]
+font_size = 20
+font_color = Color(1, 0.509804, 0.615686, 1)
+
+[node name="MainUI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_euu2o")
+
+[node name="WeaponContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0, -140)
+
+[node name="CenterContainer" type="CenterContainer" parent="WeaponContainer"]
+layout_mode = 2
+use_top_left = true
+
+[node name="HContainer" type="HBoxContainer" parent="WeaponContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="ItemContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(75, 0)
+
+[node name="CenterContainer" type="CenterContainer" parent="ItemContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="VContainer" type="VBoxContainer" parent="ItemContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="HealthExperienceContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HealthExperienceContainer"]
+layout_mode = 0
+offset_top = 51.0
+offset_right = 40.0
+offset_bottom = 91.0
+use_top_left = true
+
+[node name="VContainer" type="VBoxContainer" parent="HealthExperienceContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="HContainer" type="HBoxContainer" parent="HealthExperienceContainer/CenterContainer/VContainer"]
+layout_mode = 2
+
+[node name="HealthBarBackground" type="TextureRect" parent="HealthExperienceContainer/CenterContainer/VContainer/HContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+texture = ExtResource("2_vadpv")
+
+[node name="HealthBar" type="ProgressBar" parent="HealthExperienceContainer/CenterContainer/VContainer/HContainer/HealthBarBackground"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 293.0
+offset_bottom = 43.0
+value = 100.0
+show_percentage = false
+
+[node name="ExperienceBarBackground" type="TextureRect" parent="HealthExperienceContainer/CenterContainer/VContainer/HContainer"]
+layout_mode = 2
+texture = ExtResource("2_vadpv")
+
+[node name="ExperienceBar" type="ProgressBar" parent="HealthExperienceContainer/CenterContainer/VContainer/HContainer/ExperienceBarBackground"]
+modulate = Color(0, 0.976471, 0.380392, 1)
+layout_mode = 0
+offset_left = 7.0
+offset_top = 5.0
+offset_right = 293.0
+offset_bottom = 42.0
+value = 100.0
+show_percentage = false
+
+[node name="HBox" type="HBoxContainer" parent="HealthExperienceContainer/CenterContainer/VContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Blank" type="Label" parent="HealthExperienceContainer/CenterContainer/VContainer/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_iwlf2")
+horizontal_alignment = 1
+
+[node name="GameTimer" type="Label" parent="HealthExperienceContainer/CenterContainer/VContainer/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_iwlf2")
+horizontal_alignment = 1
+
+[node name="KillLabel" type="Label" parent="HealthExperienceContainer/CenterContainer/VContainer/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "K: 0  "
+label_settings = SubResource("LabelSettings_iwlf2")
+horizontal_alignment = 2
+
+[node name="BossHealthContainer" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="BossHealthContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = 0.00114992
+use_top_left = true
+
+[node name="HContainer" type="HBoxContainer" parent="BossHealthContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BossHealthContainer/CenterContainer/HContainer"]
+layout_mode = 2
+text = "B
+O
+S
+S"
+label_settings = SubResource("LabelSettings_p76d3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBarBackground" type="TextureRect" parent="BossHealthContainer/CenterContainer/HContainer"]
+layout_mode = 2
+texture = ExtResource("3_sy8dq")
+stretch_mode = 2
+
+[node name="HealthBar" type="ProgressBar" parent="BossHealthContainer/CenterContainer/HContainer/HealthBarBackground"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 44.0
+offset_bottom = 294.0
+value = 100.0
+fill_mode = 3
+show_percentage = false

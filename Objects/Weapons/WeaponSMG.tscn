@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dflf6n6eupkxh"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/WeaponSMG.cs" id="1_tgxnt"]
+[ext_resource type="PackedScene" uid="uid://dhescftuh5boh" path="res://Objects/Projectiles/ProjectileSMG.tscn" id="2_04kj4"]
+[ext_resource type="Texture2D" uid="uid://cl1o855kht5q7" path="res://Textures/Icons/WeaponIcons/IconSMG.png" id="2_gho3s"]
+[ext_resource type="AudioStream" uid="uid://cd3ag2cu8fnvp" path="res://Sounds/Weapons/WeaponSMG.ogg" id="4_lops8"]
+
+[node name="WeaponSMG" type="Node2D"]
+script = ExtResource("1_tgxnt")
+weaponIcon = ExtResource("2_gho3s")
+weaponName = "SMG"
+weaponDescription = "Rapidly fires at the nearest enemy"
+maxWeaponLevel = 8
+maxAmmo = 15
+damage = 4.0
+weaponScatter = 2.0
+projectileToSpawn = ExtResource("2_04kj4")
+
+[node name="AudioWeaponFire" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_lops8")
+volume_db = -5.0
+attenuation = 0.5
+max_polyphony = 2

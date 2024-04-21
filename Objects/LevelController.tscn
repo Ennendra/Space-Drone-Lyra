@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://v74qfqmnbok2"]
+
+[ext_resource type="Script" path="res://Scripts/LevelControllerScripts/LevelController.cs" id="1_83rjw"]
+
+[node name="LevelController" type="Node"]
+process_mode = 3
+script = ExtResource("1_83rjw")
+
+[node name="SpawnTimers" type="Node" parent="."]
+
+[node name="EnemyContainer" type="Node" parent="."]
+process_mode = 1
+
+[node name="ExperienceContainer" type="Node" parent="."]
+process_mode = 1
+
+[node name="EnemyProjectileContainer" type="Node" parent="."]
+process_mode = 1

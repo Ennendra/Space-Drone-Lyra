@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://caydq16b1g278"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/ProjectileBoss1_3.cs" id="1_r62kl"]
+[ext_resource type="Texture2D" uid="uid://b67afhp3h8bn7" path="res://Textures/Sprites/Projectiles/ProjectileBoss1_3.png" id="2_fyio7"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="3_kysam"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8obmi"]
+radius = 4.0
+height = 3000.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1mis"]
+radius = 4.0
+height = 3000.0
+
+[node name="ProjectileBoss1_3" type="Area2D" node_paths=PackedStringArray("hitBoxComponent") groups=["EnemyProjectile"]]
+position = Vector2(2, 0)
+collision_layer = 0
+collision_mask = 34
+script = ExtResource("1_r62kl")
+hitBoxComponent = NodePath("HitBoxComponent")
+movementBehaviour = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(1249, 0)
+scale = Vector2(100, 1)
+texture = ExtResource("2_fyio7")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(1496, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8obmi")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_kysam")]
+hitBehaviour = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(1496, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_i1mis")

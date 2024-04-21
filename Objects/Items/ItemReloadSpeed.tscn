@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://mp6ma6xg1peb"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemReload.cs" id="1_7tlsf"]
+[ext_resource type="Texture2D" uid="uid://xytmgg4e1sut" path="res://Textures/Icons/ItemIcons/IconReloadSpeed.png" id="2_v3l2k"]
+
+[node name="ItemReloadSpeed" type="Node"]
+script = ExtResource("1_7tlsf")
+itemIcon = ExtResource("2_v3l2k")
+itemName = "Ammunition Autocycling"
+itemDescription = "Increase all weapon's reload speed by 10%"

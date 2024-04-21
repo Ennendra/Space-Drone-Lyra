@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://by7uy1fuf40o7"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScripts/LevelSelect/LevelSelectInfo.cs" id="1_31yns"]
+
+[resource]
+script = ExtResource("1_31yns")

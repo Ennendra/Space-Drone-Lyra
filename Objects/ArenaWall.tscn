@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxod7emvcjc7y"]
+
+[ext_resource type="Script" path="res://Scripts/ArenaWall.cs" id="1_r561g"]
+[ext_resource type="Texture2D" uid="uid://b8dbvcfusyyow" path="res://Textures/Sprites/Other/ArenaBarrier.png" id="2_0dprm"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yqmed"]
+a = Vector2(-800, -800)
+b = Vector2(800, -800)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m2jpk"]
+a = Vector2(-800, -800)
+b = Vector2(-800, 800)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_usafm"]
+a = Vector2(800, -800)
+b = Vector2(800, 800)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_awej4"]
+a = Vector2(-800, 800)
+b = Vector2(800, 800)
+
+[node name="ArenaWall" type="StaticBody2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_r561g")
+
+[node name="ColliderTop" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_yqmed")
+
+[node name="WallSprite" type="Sprite2D" parent="ColliderTop"]
+position = Vector2(0, -800)
+rotation = 1.57079
+scale = Vector2(1, 160)
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="WallSpriteAnim" type="Sprite2D" parent="ColliderTop"]
+modulate = Color(1, 1, 1, 0.392157)
+rotation = 1.57079
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="ColliderLeft" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_m2jpk")
+
+[node name="WallSprite" type="Sprite2D" parent="ColliderLeft"]
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="WallSpriteAnim" type="Sprite2D" parent="ColliderLeft"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="ColliderRight" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_usafm")
+
+[node name="WallSprite" type="Sprite2D" parent="ColliderRight"]
+rotation = -3.14159
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="WallSpriteAnim" type="Sprite2D" parent="ColliderRight"]
+modulate = Color(1, 1, 1, 0.392157)
+rotation = 3.14159
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="ColliderBottom" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_awej4")
+
+[node name="WallSprite" type="Sprite2D" parent="ColliderBottom"]
+rotation = -1.57079
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)
+
+[node name="WallSpriteAnim" type="Sprite2D" parent="ColliderBottom"]
+modulate = Color(1, 1, 1, 0.392157)
+rotation = -1.57079
+texture = ExtResource("2_0dprm")
+offset = Vector2(7, 0)

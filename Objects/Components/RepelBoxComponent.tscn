@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://71cfwixc0kkd"]
+
+[ext_resource type="Script" path="res://Scripts/ComponentScripts/RepelBoxComponent.cs" id="1_5u742"]
+
+[node name="RepelBoxComponent" type="Area2D" groups=["RepelBoxComponent"]]
+collision_layer = 16
+collision_mask = 16
+monitoring = false
+monitorable = false
+script = ExtResource("1_5u742")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]

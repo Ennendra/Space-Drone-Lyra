@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://ocmisiudkhrb"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenuScripts/MainMenuCharacterContainer.cs" id="1_d4n8q"]
+[ext_resource type="Resource" uid="uid://b88w2g1a4q17d" path="res://Objects/Players/PlayerInfo/Player1Info.tres" id="2_aal65"]
+[ext_resource type="Texture2D" uid="uid://b0o8xp7my6vv3" path="res://Textures/Icons/PlayerIcons/IconPlayer1.png" id="3_3mh7x"]
+[ext_resource type="Texture2D" uid="uid://cl1o855kht5q7" path="res://Textures/Icons/WeaponIcons/IconSMG.png" id="4_0d8ts"]
+[ext_resource type="Texture2D" uid="uid://crled2n4sabxd" path="res://Textures/Icons/ItemIcons/IconDamage.png" id="5_lj1qb"]
+
+[node name="CharacterContainer" type="Button"]
+custom_minimum_size = Vector2(100, 100)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_d4n8q")
+playerInfo = ExtResource("2_aal65")
+
+[node name="PlayerImage" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("3_3mh7x")
+stretch_mode = 3
+
+[node name="StarterWeapon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+offset_top = 75.0
+offset_right = 25.0
+offset_bottom = 100.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("4_0d8ts")
+expand_mode = 1
+
+[node name="StarterItem" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("5_lj1qb")
+expand_mode = 1

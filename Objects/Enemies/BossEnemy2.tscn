@@ -1,0 +1,179 @@
+[gd_scene load_steps=22 format=3 uid="uid://b351wpycjpl7x"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/BossEnemy2.cs" id="1_2bqdg"]
+[ext_resource type="PackedScene" uid="uid://d3ym62iv4f6qj" path="res://Objects/Projectiles/ProjectileBoss1_1.tscn" id="2_quob1"]
+[ext_resource type="Texture2D" uid="uid://bwk8tu7tdpmh1" path="res://Textures/Sprites/Enemies/Boss2Connector.png" id="3_fry4x"]
+[ext_resource type="PackedScene" uid="uid://b0dx8gausm6qn" path="res://Objects/Projectiles/ProjectileBoss1_2.tscn" id="3_vgfnl"]
+[ext_resource type="Texture2D" uid="uid://dg43jhf5ytl31" path="res://Textures/Sprites/Enemies/Boss2.png" id="3_wp16k"]
+[ext_resource type="PackedScene" uid="uid://i5gwba14rxmw" path="res://Objects/Projectiles/ProjectileBoss2_3.tscn" id="4_r1i1y"]
+[ext_resource type="Texture2D" uid="uid://dnscs0jm4u18i" path="res://Textures/Sprites/Enemies/Boss2OuterRing.png" id="5_g2xa2"]
+[ext_resource type="Texture2D" uid="uid://c61tw2vw85pf0" path="res://Textures/Sprites/Other/TrackerIcon.png" id="5_p0q2x"]
+[ext_resource type="AudioStream" uid="uid://dwnagfn3rtn3m" path="res://Sounds/FX/EnemyHit4.ogg" id="7_fiafy"]
+[ext_resource type="AudioStream" uid="uid://dabrej4v4yb11" path="res://Sounds/Weapons/WeaponBoss2_1.ogg" id="10_y5o2f"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="11_8nxha"]
+[ext_resource type="AudioStream" uid="uid://b8qiavksfia6q" path="res://Sounds/Weapons/WeaponBoss2_2.ogg" id="11_v3yfu"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="12_o0x63"]
+[ext_resource type="AudioStream" uid="uid://drky730spgpju" path="res://Sounds/Weapons/WeaponBoss2_3.ogg" id="12_roivw"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="13_bq8ia"]
+[ext_resource type="AudioStream" uid="uid://c06bhr3wr7swy" path="res://Sounds/Weapons/WeaponBoss2_3Lockon.ogg" id="13_f7dvr"]
+[ext_resource type="PackedScene" uid="uid://ufpgmtxdftjk" path="res://Objects/Components/MovementComponent.tscn" id="14_d82kv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq3ev"]
+atlas = ExtResource("3_wp16k")
+region = Rect2(0, 0, 500, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2375"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq3ev")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ewcd"]
+radius = 57.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4va5g"]
+height = 74.0
+
+[node name="Boss2" type="Area2D" node_paths=PackedStringArray("hurtBoxComponent", "hitBoxComponent", "healthComponent", "movementComponent") groups=["Enemy"]]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_2bqdg")
+rateOfFire = PackedFloat32Array(6, 12, 0.2)
+weaponDamage = PackedFloat64Array(8, 8, 12)
+weaponProjectiles = [ExtResource("2_quob1"), ExtResource("3_vgfnl"), ExtResource("4_r1i1y")]
+speed = 0.0
+hurtBoxComponent = NodePath("HurtBoxComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+healthComponent = NodePath("HealthComponent")
+movementComponent = NodePath("MovementComponent")
+experience = 0.0
+
+[node name="TrackerSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+z_index = 3
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_p0q2x")
+
+[node name="SpriteConnector" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_fry4x")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_n2375")
+
+[node name="SpriteDamage" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_n2375")
+
+[node name="SpriteOuterRing" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_g2xa2")
+
+[node name="AudioTakeHit" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("7_fiafy")
+volume_db = -25.0
+max_distance = 1000.0
+attenuation = 1.8025
+max_polyphony = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_0ewcd")
+
+[node name="Weapon1" type="Node2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="Weapon2" type="Node2D" parent="."]
+position = Vector2(-3, -31)
+
+[node name="Weapon3" type="Node2D" parent="."]
+position = Vector2(30, 0)
+
+[node name="AudioWeaponFire1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_y5o2f")
+volume_db = -5.0
+attenuation = 0.5
+
+[node name="AudioWeaponFire2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_v3yfu")
+volume_db = -5.0
+attenuation = 0.5
+
+[node name="AudioWeaponFire3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_roivw")
+max_distance = 4000.0
+attenuation = 0.5
+
+[node name="AudioWeaponFire3Lockon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_f7dvr")
+max_distance = 4000.0
+attenuation = 0.5
+
+[node name="Weapon1Timer_Activate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="Weapon1Timer_Deactivate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[node name="Weapon2Timer_Activate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[node name="Weapon2Timer_Deactivate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="Weapon3Timer_Activate" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Weapon3Timer_Deactivate" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("spriteToFlash") instance=ExtResource("11_8nxha")]
+baseMaxHealth = 6000.0
+spriteToFlash = NodePath("../SpriteDamage")
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("12_o0x63")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("CircleShape2D_0ewcd")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("13_bq8ia")]
+collision_mask = 2
+hitBehaviour = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_0ewcd")
+
+[node name="MovementComponent" parent="." instance=ExtResource("14_d82kv")]
+
+[node name="Collider" type="CollisionShape2D" parent="MovementComponent"]
+visible = false
+position = Vector2(0, 3)
+rotation = 3.14159
+shape = SubResource("CapsuleShape2D_4va5g")
+
+[connection signal="timeout" from="Weapon1Timer_Activate" to="." method="TimerWeapon1Activate"]
+[connection signal="timeout" from="Weapon1Timer_Deactivate" to="." method="TimerWeapon1Deactivate"]
+[connection signal="timeout" from="Weapon2Timer_Activate" to="." method="TimerWeapon2Activate"]
+[connection signal="timeout" from="Weapon2Timer_Deactivate" to="." method="TimerWeapon2Deactivate"]
+[connection signal="timeout" from="Weapon3Timer_Activate" to="." method="TimerWeapon3Activate"]
+[connection signal="timeout" from="Weapon3Timer_Deactivate" to="." method="TimerWeapon3Deactivate"]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://c5o8fbxs3scj0"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/Player.cs" id="1_e1wmt"]
+[ext_resource type="PackedScene" uid="uid://b7j2a58g7unst" path="res://Objects/Weapons/WeaponShotgun.tscn" id="2_0s3si"]
+[ext_resource type="PackedScene" uid="uid://dw3dlsb4v73c4" path="res://Objects/PlayerMagnet.tscn" id="3_rn8er"]
+[ext_resource type="Texture2D" uid="uid://cv06kcmnw0ul4" path="res://Textures/Sprites/Player/Player2.png" id="4_4k3ev"]
+[ext_resource type="PackedScene" uid="uid://dpuumii10e7as" path="res://Objects/UI/MainUI.tscn" id="5_l2m3d"]
+[ext_resource type="AudioStream" uid="uid://cql4bnrk5wwhq" path="res://Sounds/UI/PickUpExperience.ogg" id="6_pr41k"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="7_8onmg"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="8_t6ld1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uuky"]
+atlas = ExtResource("4_4k3ev")
+region = Rect2(0, 0, 24, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hc10e"]
+atlas = ExtResource("4_4k3ev")
+region = Rect2(24, 0, 24, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8mof"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uuky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hc10e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_16tej"]
+radius = 9.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ndy7r"]
+radius = 6.0
+height = 14.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent") groups=["Player"]]
+z_index = 1
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_e1wmt")
+hurtBoxComponent = NodePath("HurtBoxComponent")
+healthComponent = NodePath("HealthComponent")
+starterWeapon = ExtResource("2_0s3si")
+
+[node name="PlayerMagnet" parent="." instance=ExtResource("3_rn8er")]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 6)
+sprite_frames = SubResource("SpriteFrames_v8mof")
+autoplay = "default"
+frame_progress = 0.958173
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_16tej")
+
+[node name="Camera" type="Camera2D" parent="."]
+process_mode = 3
+zoom = Vector2(1.5, 1.5)
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="SpecialItems" type="Node2D" parent="."]
+
+[node name="MainUI" parent="." instance=ExtResource("5_l2m3d")]
+process_mode = 1
+
+[node name="AudioExperiencePickup" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_pr41k")
+volume_db = -5.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 132
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_8onmg")]
+collision_layer = 2
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("CapsuleShape2D_ndy7r")
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_t6ld1")]
+
+[connection signal="child_entered_tree" from="Weapons" to="." method="OnNewWeaponAdded"]
+[connection signal="child_entered_tree" from="Items" to="." method="OnNewItemAdded"]

@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjcjhdm8sdaqq"]
+
+[ext_resource type="Texture2D" uid="uid://d1wojg6egusb8" path="res://Textures/UI/UIWeaponBackground.png" id="1_br4jt"]
+[ext_resource type="Script" path="res://Scripts/UIScripts/UIWeaponSlot.cs" id="2_2ej3a"]
+[ext_resource type="Texture2D" uid="uid://xo7c8x2mvexs" path="res://Textures/UI/UIWeaponProgress.png" id="3_ga7qv"]
+[ext_resource type="Texture2D" uid="uid://bkdty6gfce2m8" path="res://Textures/UI/UIWeaponOutline.png" id="4_mpaic"]
+[ext_resource type="Texture2D" uid="uid://cl1o855kht5q7" path="res://Textures/Icons/WeaponIcons/IconSMG.png" id="5_i56go"]
+[ext_resource type="Texture2D" uid="uid://cdclgho6nehvi" path="res://Textures/UI/UILocked.png" id="6_woyvk"]
+[ext_resource type="Texture2D" uid="uid://b2pa3cbbonj6e" path="res://Textures/UI/UIWeaponItemLevelBackground.png" id="7_4rpjk"]
+[ext_resource type="Texture2D" uid="uid://crtb31flch3tr" path="res://Textures/UI/UIWeaponLevelPipOff.png" id="8_uflb4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jg5sp"]
+font_size = 26
+
+[node name="UIWeaponSlot" type="GridContainer"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -136.0
+offset_right = 100.5
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_2ej3a")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="UIWeapon" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("1_br4jt")
+
+[node name="UIReloadProgress" type="TextureProgressBar" parent="Container/UIWeapon"]
+modulate = Color(0, 1, 0.415686, 1)
+layout_mode = 2
+offset_right = 201.0
+offset_bottom = 208.0
+fill_mode = 4
+texture_progress = ExtResource("3_ga7qv")
+tint_progress = Color(0, 1, 0.501961, 1)
+
+[node name="UIWeaponOutline" type="TextureRect" parent="Container/UIWeapon"]
+layout_mode = 2
+offset_right = 201.0
+offset_bottom = 208.0
+texture = ExtResource("4_mpaic")
+
+[node name="UIWeaponIcon" type="TextureRect" parent="Container/UIWeapon"]
+visible = false
+layout_mode = 2
+offset_left = 56.6667
+offset_top = 39.9998
+offset_right = 104.667
+offset_bottom = 87.9998
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("5_i56go")
+
+[node name="UIWeaponAmmo" type="Label" parent="Container/UIWeapon"]
+visible = false
+layout_mode = 2
+offset_left = 50.0
+offset_top = 130.0
+offset_right = 150.0
+offset_bottom = 169.0
+text = "20/20
+"
+label_settings = SubResource("LabelSettings_jg5sp")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="UIWeaponEmpty" type="TextureRect" parent="Container/UIWeapon"]
+layout_mode = 0
+offset_left = 56.5
+offset_top = 42.0
+offset_right = 144.5
+offset_bottom = 165.0
+texture = ExtResource("6_woyvk")
+
+[node name="UIWeaponLevel" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("7_4rpjk")
+stretch_mode = 3
+
+[node name="PipContainer" type="HBoxContainer" parent="Container/UIWeaponLevel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -22.0
+offset_right = 94.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LevelPip1" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip2" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip3" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip4" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip5" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip6" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip7" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")
+
+[node name="LevelPip8" type="TextureRect" parent="Container/UIWeaponLevel/PipContainer"]
+layout_mode = 2
+texture = ExtResource("8_uflb4")

@@ -1,0 +1,169 @@
+[gd_scene load_steps=18 format=3 uid="uid://bpjnelstvuhw3"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/BossEnemy1.cs" id="1_mbhs3"]
+[ext_resource type="Texture2D" uid="uid://cqv2hyei6x25c" path="res://Textures/Sprites/Enemies/Boss1.png" id="2_7ry1o"]
+[ext_resource type="PackedScene" uid="uid://d3ym62iv4f6qj" path="res://Objects/Projectiles/ProjectileBoss1_1.tscn" id="2_j1g7d"]
+[ext_resource type="Texture2D" uid="uid://c61tw2vw85pf0" path="res://Textures/Sprites/Other/TrackerIcon.png" id="2_ppjlu"]
+[ext_resource type="AudioStream" uid="uid://dwnagfn3rtn3m" path="res://Sounds/FX/EnemyHit4.ogg" id="3_b2tii"]
+[ext_resource type="PackedScene" uid="uid://b0dx8gausm6qn" path="res://Objects/Projectiles/ProjectileBoss1_2.tscn" id="3_gakby"]
+[ext_resource type="PackedScene" uid="uid://caydq16b1g278" path="res://Objects/Projectiles/ProjectileBoss1_3.tscn" id="4_sr5vg"]
+[ext_resource type="AudioStream" uid="uid://dkkjwgic86n6b" path="res://Sounds/Weapons/WeaponBoss1_1.ogg" id="8_a5jjy"]
+[ext_resource type="AudioStream" uid="uid://qpxgdmxtyjbw" path="res://Sounds/Weapons/WeaponBoss1_2.ogg" id="9_f5mbt"]
+[ext_resource type="AudioStream" uid="uid://yogiy04bess6" path="res://Sounds/Weapons/WeaponBoss1_3.ogg" id="10_6kbyd"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="11_sghev"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="12_k7rfk"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="13_rqikc"]
+[ext_resource type="PackedScene" uid="uid://ufpgmtxdftjk" path="res://Objects/Components/MovementComponent.tscn" id="14_debjk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmv3s"]
+atlas = ExtResource("2_7ry1o")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2375"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmv3s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4va5g"]
+height = 74.0
+
+[node name="Boss1" type="Area2D" node_paths=PackedStringArray("hurtBoxComponent", "hitBoxComponent", "healthComponent", "movementComponent") groups=["Enemy"]]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_mbhs3")
+rateOfFire = PackedFloat32Array(4, 1, 0.2)
+weaponDamage = PackedFloat64Array(7, 7, 30)
+weaponProjectiles = [ExtResource("2_j1g7d"), ExtResource("3_gakby"), ExtResource("4_sr5vg")]
+speed = 140.0
+hurtBoxComponent = NodePath("HurtBoxComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+healthComponent = NodePath("HealthComponent")
+movementComponent = NodePath("MovementComponent")
+experience = 900.0
+
+[node name="TrackerSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+z_index = 3
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_ppjlu")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_n2375")
+
+[node name="SpriteDamage" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_n2375")
+
+[node name="AudioTakeHit" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_b2tii")
+volume_db = -25.0
+max_distance = 1000.0
+attenuation = 1.8025
+max_polyphony = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(-3, -35, 3, -35, 15, 10, 35, 16, 9, 38, -9, 38, -35, 16, -15, 10)
+
+[node name="Weapon1Left" type="Node2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="Weapon1Right" type="Node2D" parent="."]
+position = Vector2(0, 24)
+
+[node name="Weapon2Left" type="Node2D" parent="."]
+position = Vector2(-3, -31)
+
+[node name="Weapon2Right" type="Node2D" parent="."]
+position = Vector2(-3, 31)
+
+[node name="Weapon3" type="Node2D" parent="."]
+position = Vector2(30, 0)
+
+[node name="AudioWeaponFire1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_a5jjy")
+volume_db = -5.0
+attenuation = 0.5
+
+[node name="AudioWeaponFire2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_f5mbt")
+volume_db = -5.0
+attenuation = 0.5
+
+[node name="AudioWeaponFire3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_6kbyd")
+max_distance = 4000.0
+attenuation = 0.5
+
+[node name="Weapon1Timer_Activate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="Weapon1Timer_Deactivate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[node name="Weapon2Timer_Activate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[node name="Weapon2Timer_Deactivate" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[node name="Weapon3Timer_Activate" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="Weapon3Timer_Deactivate" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("spriteToFlash") instance=ExtResource("11_sghev")]
+baseMaxHealth = 2500.0
+spriteToFlash = NodePath("../SpriteDamage")
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("12_k7rfk")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HurtBoxComponent"]
+rotation = 1.5708
+polygon = PackedVector2Array(-3, -35, 3, -35, 15, 10, 35, 16, 9, 38, -9, 38, -35, 16, -15, 10)
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("13_rqikc")]
+collision_mask = 2
+hitBehaviour = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBoxComponent"]
+rotation = 1.5708
+polygon = PackedVector2Array(-3, -35, 3, -35, 15, 10, 35, 16, 9, 38, -9, 38, -35, 16, -15, 10)
+
+[node name="MovementComponent" parent="." instance=ExtResource("14_debjk")]
+speed = 140.0
+
+[node name="Collider" type="CollisionShape2D" parent="MovementComponent"]
+visible = false
+position = Vector2(0, 3)
+rotation = 3.14159
+shape = SubResource("CapsuleShape2D_4va5g")
+
+[connection signal="timeout" from="Weapon1Timer_Activate" to="." method="TimerWeapon1Activate"]
+[connection signal="timeout" from="Weapon1Timer_Deactivate" to="." method="TimerWeapon1Deactivate"]
+[connection signal="timeout" from="Weapon2Timer_Activate" to="." method="TimerWeapon2Activate"]
+[connection signal="timeout" from="Weapon2Timer_Deactivate" to="." method="TimerWeapon2Deactivate"]
+[connection signal="timeout" from="Weapon3Timer_Activate" to="." method="TimerWeapon3Activate"]
+[connection signal="timeout" from="Weapon3Timer_Deactivate" to="." method="TimerWeapon3Deactivate"]

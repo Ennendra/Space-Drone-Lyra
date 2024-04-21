@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bogvq0co3pbfh"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/WeaponGrenade.cs" id="1_b2coh"]
+[ext_resource type="Texture2D" uid="uid://cc8bj5gxlbq0e" path="res://Textures/Icons/WeaponIcons/IconGrenade.png" id="2_an1ta"]
+[ext_resource type="PackedScene" uid="uid://bl11ha5awr52h" path="res://Objects/Projectiles/ProjectileGrenadeCluster.tscn" id="2_l8vbu"]
+[ext_resource type="PackedScene" uid="uid://b1wmsef4rwfbb" path="res://Objects/Projectiles/ProjectileGrenade.tscn" id="3_4578d"]
+[ext_resource type="AudioStream" uid="uid://cj2tkmqrb4qvx" path="res://Sounds/UI/MenuUI/WeaponGrenade.ogg" id="4_ksh2j"]
+
+[node name="WeaponGrenade" type="Node2D"]
+script = ExtResource("1_b2coh")
+maxLevelProjectileToSpawn = ExtResource("2_l8vbu")
+weaponIcon = ExtResource("2_an1ta")
+weaponName = "Grenade"
+weaponDescription = "Fires towards a random enemy, detonates after short delay"
+maxWeaponLevel = 8
+distanceToFire = 250.0
+reloadTime = 2.0
+rateOfFire = 3.0
+maxAmmo = 4
+damage = 5.0
+weaponScatter = 5.0
+targetType = 3
+projectileToSpawn = ExtResource("3_4578d")
+
+[node name="AudioWeaponFire" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_ksh2j")
+volume_db = -5.0
+attenuation = 0.5
+max_polyphony = 2

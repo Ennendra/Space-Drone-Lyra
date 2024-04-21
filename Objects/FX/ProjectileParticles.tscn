@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://k3npcyhlanvl"]
+
+[ext_resource type="Texture2D" uid="uid://bdm2q42uheplj" path="res://Textures/Sprites/FX/ExplosionParticle.png" id="1_vrceo"]
+[ext_resource type="Script" path="res://Scripts/ParticleOneShot.cs" id="2_7yp5a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ypt1h"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_6jq8n"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7ef1c"]
+gradient = SubResource("Gradient_6jq8n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c685e"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_7ef1c")
+
+[node name="ProjectileParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_ypt1h")
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_c685e")
+texture = ExtResource("1_vrceo")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_7yp5a")

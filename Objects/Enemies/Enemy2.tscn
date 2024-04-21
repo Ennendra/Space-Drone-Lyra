@@ -1,0 +1,135 @@
+[gd_scene load_steps=20 format=3 uid="uid://bbwqubuqkk131"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/Enemy2.cs" id="1_gvxy3"]
+[ext_resource type="PackedScene" uid="uid://b0cy46a4glgs4" path="res://Objects/Projectiles/ProjectileEnemy2.tscn" id="2_u2xwb"]
+[ext_resource type="Texture2D" uid="uid://dajryml24kgrt" path="res://Textures/Sprites/Enemies/Enemy2.png" id="3_fvry6"]
+[ext_resource type="AudioStream" uid="uid://dwnagfn3rtn3m" path="res://Sounds/FX/EnemyHit4.ogg" id="3_x2jbv"]
+[ext_resource type="AudioStream" uid="uid://bcg6bv1hw3fyp" path="res://Sounds/Weapons/WeaponSniper1.ogg" id="5_t13es"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="6_yylow"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="7_cjflg"]
+[ext_resource type="PackedScene" uid="uid://ufpgmtxdftjk" path="res://Objects/Components/MovementComponent.tscn" id="9_kpy8s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcygs"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svmc7"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfb7t"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ogct"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4bh3"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p8u1"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kgjb"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dtj0"]
+atlas = ExtResource("3_fvry6")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lherk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcygs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svmc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfb7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ogct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4bh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p8u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kgjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dtj0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdx7k"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ghae"]
+radius = 8.0
+
+[node name="Enemy2" type="Area2D" node_paths=PackedStringArray("hurtBoxComponent", "healthComponent", "movementComponent") groups=["Enemy", "Ranged"]]
+collision_layer = 512
+collision_mask = 544
+script = ExtResource("1_gvxy3")
+projectileToSpawn = ExtResource("2_u2xwb")
+hurtBoxComponent = NodePath("HurtBoxComponent")
+healthComponent = NodePath("HealthComponent")
+movementComponent = NodePath("MovementComponent")
+dealsDamageOnContact = false
+damage = 4.0
+experience = 5.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lherk")
+autoplay = "default"
+frame_progress = 0.746951
+
+[node name="SpriteDamage" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_lherk")
+autoplay = "default"
+frame_progress = 0.746951
+
+[node name="AudioTakeHit" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_x2jbv")
+volume_db = -25.0
+max_distance = 1000.0
+attenuation = 1.8025
+max_polyphony = 3
+
+[node name="AudioWeaponFire" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_t13es")
+volume_db = -15.0
+attenuation = 0.5
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("spriteToFlash") instance=ExtResource("6_yylow")]
+baseMaxHealth = 10.0
+spriteToFlash = NodePath("../SpriteDamage")
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_cjflg")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("CircleShape2D_fdx7k")
+
+[node name="MovementComponent" parent="." instance=ExtResource("9_kpy8s")]
+speed = 80.0
+
+[node name="Collider" type="CollisionShape2D" parent="MovementComponent"]
+rotation = 1.57079
+shape = SubResource("CircleShape2D_2ghae")

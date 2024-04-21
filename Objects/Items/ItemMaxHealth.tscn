@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b55uvakiqmge7"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemMaxHealth.cs" id="1_ptov0"]
+[ext_resource type="Texture2D" uid="uid://b5ywnkrffp5ko" path="res://Textures/Icons/ItemIcons/IconMaxHealth.png" id="2_wv6sq"]
+
+[node name="ItemMaxHealth" type="Node"]
+script = ExtResource("1_ptov0")
+itemIcon = ExtResource("2_wv6sq")
+itemName = "Gel Armor Casing"
+itemDescription = "Increase maximum health by 20%"

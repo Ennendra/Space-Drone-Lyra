@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bikc1m7g40ek8"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemExperience.cs" id="1_givam"]
+[ext_resource type="Texture2D" uid="uid://dwxod2guwnehw" path="res://Textures/Icons/ItemIcons/IconExperience.png" id="2_i5s2c"]
+
+[node name="ItemExperience" type="Node"]
+script = ExtResource("1_givam")
+itemIcon = ExtResource("2_i5s2c")
+itemName = "Data Recorder"
+itemDescription = "Increase Experience gain by 10%"

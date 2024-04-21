@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://dft56udyey2b1"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyScripts/Enemy1.cs" id="1_imarw"]
+[ext_resource type="Texture2D" uid="uid://bcvm3p70dvfst" path="res://Textures/Sprites/Enemies/Enemy1.png" id="2_csktp"]
+[ext_resource type="AudioStream" uid="uid://dwnagfn3rtn3m" path="res://Sounds/FX/EnemyHit4.ogg" id="3_luof6"]
+[ext_resource type="PackedScene" uid="uid://bpga6i3qy64va" path="res://Objects/Components/HurtBoxComponent.tscn" id="4_tekmj"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="6_vvd11"]
+[ext_resource type="PackedScene" uid="uid://c8h08rg6j72lt" path="res://Objects/Components/HealthComponent.tscn" id="7_tr80t"]
+[ext_resource type="PackedScene" uid="uid://ufpgmtxdftjk" path="res://Objects/Components/MovementComponent.tscn" id="8_lsgaj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_727wv"]
+atlas = ExtResource("2_csktp")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woxc2"]
+atlas = ExtResource("2_csktp")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn420"]
+atlas = ExtResource("2_csktp")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dwjy"]
+atlas = ExtResource("2_csktp")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chxyr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_727wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woxc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn420")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dwjy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d5tjd"]
+radius = 8.0
+height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_po1m8"]
+radius = 8.0
+height = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0c8d0"]
+radius = 9.0
+
+[node name="Enemy1" type="Area2D" node_paths=PackedStringArray("hurtBoxComponent", "hitBoxComponent", "healthComponent", "movementComponent") groups=["Enemy"]]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_imarw")
+hurtBoxComponent = NodePath("HurtBoxComponent")
+hitBoxComponent = NodePath("HitBoxComponent")
+healthComponent = NodePath("HealthComponent")
+movementComponent = NodePath("MovementComponent")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_chxyr")
+autoplay = "default"
+frame_progress = 0.535264
+
+[node name="SpriteDamage" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+sprite_frames = SubResource("SpriteFrames_chxyr")
+autoplay = "default"
+frame_progress = 0.535264
+
+[node name="AudioTakeHit" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_luof6")
+volume_db = -25.0
+max_distance = 1000.0
+attenuation = 1.8025
+max_polyphony = 3
+
+[node name="HurtBoxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_tekmj")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_d5tjd")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("6_vvd11")]
+collision_mask = 2
+hitBehaviour = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_po1m8")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("spriteToFlash") instance=ExtResource("7_tr80t")]
+baseMaxHealth = 12.0
+spriteToFlash = NodePath("../SpriteDamage")
+
+[node name="MovementComponent" parent="." instance=ExtResource("8_lsgaj")]
+speed = 80.0
+
+[node name="Collider" type="CollisionShape2D" parent="MovementComponent"]
+process_priority = 2
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 2
+rotation = 1.57079
+shape = SubResource("CircleShape2D_0c8d0")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5fs431sghaix"]
+
+[ext_resource type="Script" path="res://Scripts/DamageIndicator.cs" id="1_igt3c"]
+
+[node name="DamageIndicator" type="Label"]
+z_index = 15
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_igt3c")

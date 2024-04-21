@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0cy46a4glgs4"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/ProjectileScripts/EnemyProjectileParent.cs" id="1_40ftt"]
+[ext_resource type="Texture2D" uid="uid://dvfeqgp6gid8q" path="res://Textures/Sprites/Projectiles/Projectile1.png" id="2_l7qa5"]
+[ext_resource type="PackedScene" uid="uid://costeplgqf42w" path="res://Objects/Components/HitBoxComponent.tscn" id="3_b7ds7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nonmj"]
+radius = 8.24621
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g36ix"]
+radius = 8.0
+
+[node name="ProjectileEnemy2" type="Area2D" node_paths=PackedStringArray("hitBoxComponent") groups=["EnemyProjectile"]]
+process_physics_priority = 3
+collision_layer = 256
+collision_mask = 34
+script = ExtResource("1_40ftt")
+hitBoxComponent = NodePath("HitBoxComponent")
+speed = 500.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.313726, 0.247059, 1)
+scale = Vector2(3, 3)
+texture = ExtResource("2_l7qa5")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nonmj")
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("3_b7ds7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+shape = SubResource("CircleShape2D_g36ix")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7j2a58g7unst"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/WeaponShotgun.cs" id="1_k63q3"]
+[ext_resource type="PackedScene" uid="uid://b4osrisqh65e6" path="res://Objects/Projectiles/ProjectileShotgun.tscn" id="2_lfikj"]
+[ext_resource type="Texture2D" uid="uid://c38cgnsh8wv8q" path="res://Textures/Icons/WeaponIcons/IconShotgun.png" id="2_rpg4p"]
+[ext_resource type="AudioStream" uid="uid://bxvx0vlgfnsf2" path="res://Sounds/Weapons/WeaponShotgun.ogg" id="4_3vmm7"]
+
+[node name="WeaponShotgun" type="Node2D"]
+script = ExtResource("1_k63q3")
+weaponIcon = ExtResource("2_rpg4p")
+weaponName = "Shotgun"
+weaponDescription = "Fires pellets at nearest enemy"
+maxWeaponLevel = 8
+projectilesPerShot = 6
+distanceToFire = 300.0
+rateOfFire = 3.0
+maxAmmo = 5
+weaponScatter = 9.0
+projectileToSpawn = ExtResource("2_lfikj")
+
+[node name="AudioWeaponFire" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_3vmm7")
+volume_db = -5.0
+attenuation = 0.5
+max_polyphony = 2

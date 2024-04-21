@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1o1h1ukc0340"]
+
+[ext_resource type="Script" path="res://Scripts/WeaponScripts/WeaponSniper.cs" id="1_mni43"]
+[ext_resource type="Texture2D" uid="uid://dcpo5mkh2myto" path="res://Textures/Icons/WeaponIcons/IconSniper.png" id="2_f55bc"]
+[ext_resource type="PackedScene" uid="uid://c3omlkkb5rppe" path="res://Objects/Projectiles/ProjectileSniper.tscn" id="3_aaylt"]
+[ext_resource type="AudioStream" uid="uid://bcg6bv1hw3fyp" path="res://Sounds/Weapons/WeaponSniper1.ogg" id="4_op8bj"]
+[ext_resource type="AudioStream" uid="uid://buij8jbpshix" path="res://Sounds/Weapons/WeaponSniper2.ogg" id="5_4iga7"]
+
+[node name="WeaponSniper" type="Node2D"]
+position = Vector2(-1, 1)
+script = ExtResource("1_mni43")
+weaponIcon = ExtResource("2_f55bc")
+weaponName = "Sniper"
+weaponDescription = "Targets the enemy with the most current HP, dealing heavy damage"
+maxWeaponLevel = 8
+distanceToFire = 800.0
+reloadTime = 4.0
+rateOfFire = 0.25
+maxAmmo = 5
+damage = 45.0
+weaponScatter = 0.5
+targetType = 1
+isDirectHit = true
+projectileToSpawn = ExtResource("3_aaylt")
+
+[node name="AudioWeaponFire" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_op8bj")
+volume_db = -5.0
+attenuation = 0.5
+
+[node name="AudioWeaponFireUpgraded" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_4iga7")
+volume_db = -5.0
+attenuation = 0.5

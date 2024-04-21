@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://cka7vu3guesh7"]
+
+[ext_resource type="Script" path="res://Scripts/UIScripts/LevelUpButton.cs" id="1_6ywra"]
+[ext_resource type="Texture2D" uid="uid://dcpo5mkh2myto" path="res://Textures/Icons/WeaponIcons/IconSniper.png" id="2_wt7yh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4tel"]
+bg_color = Color(0.0156863, 0, 0.0470588, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvvxq"]
+bg_color = Color(0.0666667, 0, 0.2, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxhde"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_cc80d"]
+line_spacing = 1.0
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_v6nah"]
+line_spacing = 1.0
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_240wf"]
+line_spacing = 1.0
+font_size = 14
+
+[node name="LevelUpButton" type="Button"]
+z_index = 5
+custom_minimum_size = Vector2(0, 80)
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_d4tel")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kvvxq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yxhde")
+script = ExtResource("1_6ywra")
+
+[node name="ButtonIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 53.0
+offset_bottom = 66.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_wt7yh")
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_right = 94.0
+offset_bottom = 26.0
+text = "Name"
+label_settings = SubResource("LabelSettings_cc80d")
+
+[node name="LabelDescription" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 223.0
+offset_bottom = 74.0
+text = "Description text will go here, it may need to be about this long or longer"
+label_settings = SubResource("LabelSettings_v6nah")
+autowrap_mode = 2
+
+[node name="LabelLevel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 169.0
+offset_right = 223.0
+offset_bottom = 25.0
+text = "Level 1"
+label_settings = SubResource("LabelSettings_240wf")
+horizontal_alignment = 2

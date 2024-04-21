@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://du82url1qer55"]
+
+[ext_resource type="Script" path="res://Scripts/UIScripts/BossIntroWarning.cs" id="1_fwyvp"]
+[ext_resource type="AudioStream" uid="uid://b8el07aq50d1s" path="res://Sounds/UI/UIWarningSound.ogg" id="1_nnhbn"]
+[ext_resource type="Texture2D" uid="uid://b36ujfrjm57vv" path="res://Textures/UI/UIWarningBar.png" id="2_jdwto"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dwdsg"]
+font_size = 96
+
+[node name="BossIntroWarning" type="CanvasLayer"]
+script = ExtResource("1_fwyvp")
+
+[node name="CBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 924.0
+offset_top = -20.0
+offset_right = 964.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CBar/CenterContainer"]
+custom_minimum_size = Vector2(3000, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CBar/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.588235)
+custom_minimum_size = Vector2(6000, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_jdwto")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="CBar/CenterContainer/VBoxContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "
+"
+label_settings = SubResource("LabelSettings_dwdsg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CBar/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.588235)
+custom_minimum_size = Vector2(6000, 0)
+layout_mode = 2
+texture = ExtResource("2_jdwto")
+stretch_mode = 1
+
+[node name="CLabel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CLabel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CLabel/CenterContainer"]
+custom_minimum_size = Vector2(3000, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CLabel/CenterContainer/VBoxContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+text = "WARNING!"
+label_settings = SubResource("LabelSettings_dwdsg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_nnhbn")
+autoplay = true

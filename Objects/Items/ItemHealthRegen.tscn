@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://q5146hhcy2li"]
+
+[ext_resource type="Script" path="res://Scripts/ItemScripts/ItemHealthRegen.cs" id="1_7ubai"]
+[ext_resource type="Texture2D" uid="uid://cn81myit53jpw" path="res://Textures/Icons/ItemIcons/IconHealthRegen.png" id="2_l47ub"]
+
+[node name="ItemHealthRegen" type="Node"]
+script = ExtResource("1_7ubai")
+itemIcon = ExtResource("2_l47ub")
+itemName = "Internal Nanites"
+itemDescription = "Increase health regeneration by 0.2 per second"

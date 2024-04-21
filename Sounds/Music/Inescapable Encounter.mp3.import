@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dlcx2ehjcld77"
+path="res://.godot/imported/Inescapable Encounter.mp3-3da35ead582151d9b056bae6c485b337.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Music/Inescapable Encounter.mp3"
+dest_files=["res://.godot/imported/Inescapable Encounter.mp3-3da35ead582151d9b056bae6c485b337.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
